@@ -51,3 +51,13 @@ jobs:
           path: |
             target/surefire-reports/
           retention-days: 10
+
+      - name: Start Spring Boot app
+        run: |
+          nohup mvn spring-boot:run &
+          sleep 20  # wait for app to start
+
+      - name: Test GET API
+        run: |
+          curl -v http://localhost:8080/test
+
